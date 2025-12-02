@@ -103,6 +103,8 @@ def full_orthotropic_values(Ex, Ey, Gxy, nu_xy,
 # -----------------------------------------------------------
 
 plys = [
+    # (MaterialName, FiberAngle[deg], Thickness[mm],
+    #  [E1[MPa], E2[MPa], G12[MPa], nu12, Ez[MPa], nu23])
     ("P3252S-12", 90,   0.125, [30000.0, 10000.0, 4000.0, 0.3,  3000.0, 0.45]),
     ("HRX350G125S", +45, 0.111, [135000.0, 9000.0, 5000.0, 0.3, 3000.0, 0.45]),
     ("HRX350G125S", 0,    0.111, [135000.0, 9000.0, 5000.0, 0.3, 3000.0, 0.45]),
@@ -132,6 +134,41 @@ _, _, _, [E1, E2, G12, nu12, G23, nu23] = plys[1]
 
 full9 = full_orthotropic_values(Ex, Ey, Gxy, nu_xy, E2, G23, nu23)
 
-print("\n=== Full orthotropic 9 values ===")
-for k, v in full9.items():
-    print(f"{k} = {v:.3f}")
+print("Total thickness t = {:.6f} mm".format(t_total))
+
+np.set_printoptions(precision=3, suppress=True)
+
+print("\nA matrix [N/mm]:\n", A)
+print("\nB matrix [N]:\n", B)
+print("\nD matrix [N·mm]:\n", D)
+
+# Equivalent in-plane (orthotropic) properties from A
+Ex, Ey, Gxy, nu_xy = equivalent_in_plane_from_A(A, t_total)
+print("\nEquivalent in-plane orthotropic properties (from A):")
+print("Ex = {:.3f} MPa".format(Ex))
+print("Ey = {:.3f} MPa".format(Ey))
+print("Gxy = {:.3f} MPa".format(Gxy))
+print("nu_xy = {:.4f}".format(nu_xy))
+
+print("\nFull 9 orthotropic constants (unit included):")
+print("Ex   = {:.3f} MPa".format(full9["Ex"]))
+print("Ey   = {:.3f} MPa".format(full9["Ey"]))
+print("Ez   = {:.3f} MPa".format(full9["Ez"]))
+
+print("Gxy  = {:.3f} MPa".format(full9["Gxy"]))
+print("Gyz  = {:.3f} MPa".format(full9["Gyz"]))
+print("Gzx  = {:.3f} MPa".format(full9["Gzx"]))
+
+print("ν_xy = {:.4f}".format(full9["nu_xy"]))
+print("ν_yz = {:.4f}".format(full9["nu_yz"]))
+print("ν_zx = {:.4f}".format(full9["nu_zx"]))
+
+
+print("\n--- Unit Notes ---")
+print(" - All elastic moduli: MPa")
+print(" - Thickness: mm")
+print(" - A matrix: N/mm")
+print(" - B matrix: N")
+print(" - D matrix: N·mm")
+print(" - Poisson ratios are dimensionless")
+
