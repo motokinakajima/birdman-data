@@ -98,6 +98,33 @@ def full_orthotropic_values(Ex, Ey, Gxy, nu_xy,
         "Gzx": Gzx
     }
 
+# ---------------------------------------------------------
+# NEW: Equivalent isotropic modulus from CLT D matrix
+# ---------------------------------------------------------
+def equivalent_isotropic_from_D(D, t_total, nu=0.28, mode="avg"):
+    """
+    D       : CLT D matrix [N·mm]
+    t_total : total thickness [mm]
+    nu      : assumed isotropic Poisson's ratio
+    mode    : "D11", "D22", or "avg"
+
+    Returns:
+        E_eq [MPa]
+    """
+
+    if mode == "D11":
+        D_eq = D[0,0]
+    elif mode == "D22":
+        D_eq = D[1,1]
+    elif mode == "avg":
+        D_eq = 0.5 * (D[0,0] + D[1,1])
+    else:
+        raise ValueError("mode must be 'D11', 'D22', or 'avg'")
+
+    E_eq = 12.0 * (1.0 - nu**2) * D_eq / (t_total**3)
+    return E_eq
+
+
 # -----------------------------------------------------------
 # Demo (same ply stack as before) — REPLACE material data!
 # -----------------------------------------------------------
@@ -105,13 +132,16 @@ def full_orthotropic_values(Ex, Ey, Gxy, nu_xy,
 plys = [
     # (MaterialName, FiberAngle[deg], Thickness[mm],
     #  [E1[MPa], E2[MPa], G12[MPa], nu12, Ez[MPa], nu23])
-    ("P3252S-12", 90,   0.125, [30000.0, 10000.0, 4000.0, 0.3,  3000.0, 0.45]),
-    ("HRX350G125S", +45, 0.111, [135000.0, 9000.0, 5000.0, 0.3, 3000.0, 0.45]),
-    ("HRX350G125S", 0,    0.111, [135000.0, 9000.0, 5000.0, 0.3, 3000.0, 0.45]),
-    ("HRX350G125S", -45, 0.111, [135000.0, 9000.0, 5000.0, 0.3, 3000.0, 0.45]),
-    ("HRX350G125S", 0,    0.111, [135000.0, 9000.0, 5000.0, 0.3, 3000.0, 0.45]),
-    ("HRX350G125S", +45, 0.111, [135000.0, 9000.0, 5000.0, 0.3, 3000.0, 0.45]),
-    ("P3252S-12", 90,   0.125, [30000.0, 10000.0, 4000.0, 0.3, 3000.0, 0.45])
+
+    ("P3252S-12",  90, 0.125, [127000.0, 8830.0, 4120.0, 0.30, 8000.0, 0.45]),
+
+    ("HRX350G125S", +45, 0.111, [216000.0, 7850.0, 3920.0, 0.30, 7000.0, 0.45]),
+    ("HRX350G125S",   0, 0.111, [216000.0, 7850.0, 3920.0, 0.30, 7000.0, 0.45]),
+    ("HRX350G125S", -45, 0.111, [216000.0, 7850.0, 3920.0, 0.30, 7000.0, 0.45]),
+    ("HRX350G125S",   0, 0.111, [216000.0, 7850.0, 3920.0, 0.30, 7000.0, 0.45]),
+    ("HRX350G125S", +45, 0.111, [216000.0, 7850.0, 3920.0, 0.30, 7000.0, 0.45]),
+
+    ("P3252S-12",  90, 0.125, [127000.0, 8830.0, 4120.0, 0.30, 8000.0, 0.45]),
 ]
 
 # thickness
@@ -171,4 +201,11 @@ print(" - A matrix: N/mm")
 print(" - B matrix: N")
 print(" - D matrix: N·mm")
 print(" - Poisson ratios are dimensionless")
+
+# Equivalent isotropic modulus for bending-only FEA
+E_iso = equivalent_isotropic_from_D(D, t_total, nu=0.28, mode="avg")
+
+print("\nEquivalent isotropic modulus for bending-only FEA:")
+print("E_iso = {:.1f} MPa".format(E_iso))
+print("nu_iso = 0.28 (assumed)")
 

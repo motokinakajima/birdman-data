@@ -1,0 +1,12 @@
+{
+  "name": "0keta",
+  "description": "0keta CLT ply configuration",
+  "plies": [
+    {"material": "P3252S-12", "angle": 90, "thickness": null},
+    {"material": "HRX350G125S", "angle": 45, "thickness": null},
+    {"material": "HRX350G125S", "angle": 0, "thickness": null},
+    {"material": "HRX350G125S", "angle": -45, "thickness": null},
+    {"material": "HRX350G125S", "angle": 0, "thickness": null},
+    {"material": "P3252S-12", "angle": 90, "thickness": null}
+  ]
+}

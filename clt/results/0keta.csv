@@ -1,0 +1,24 @@
+# CLT Analysis Results: 0keta
+# Total thickness: 0.694000 mm
+# Number of plies: 6
+#
+Property,Value,Unit
+Ex,86928.384,MPa
+Ey,64311.761,MPa
+Gxy,20320.492,MPa
+nu_xy,0.2041,-
+
+Full Orthotropic Properties,,
+Ex,86928.384,MPa
+Ey,64311.761,MPa
+Ez,8830.000,MPa
+Gxy,20320.492,MPa
+Gyz,4120.000,MPa
+Gzx,4120.000,MPa
+nu_xy,0.2041,-
+nu_yz,0.4500,-
+nu_zx,0.4500,-
+
+Equivalent Isotropic (for FEA),,
+E_iso,67431.7,MPa
+nu_iso,0.28,-

@@ -1,0 +1,24 @@
+# CLT Analysis Results: Example_Spar_Layup
+# Total thickness: 0.805000 mm
+# Number of plies: 7
+#
+Property,Value,Unit
+Ex,78691.770,MPa
+Ey,59740.717,MPa
+Gxy,24051.867,MPa
+nu_xy,0.2507,-
+
+Full Orthotropic Properties,,
+Ex,78691.770,MPa
+Ey,59740.717,MPa
+Ez,8830.000,MPa
+Gxy,24051.867,MPa
+Gyz,4120.000,MPa
+Gzx,4120.000,MPa
+nu_xy,0.2507,-
+nu_yz,0.4500,-
+nu_zx,0.4500,-
+
+Equivalent Isotropic (for FEA),,
+E_iso,64048.3,MPa
+nu_iso,0.28,-
