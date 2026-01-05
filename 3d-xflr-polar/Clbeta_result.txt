@@ -1,0 +1,15 @@
+Clβ CALCULATION RESULTS
+============================================================
+Data file          : Beta_Cl_data.csv
+Regression range   : β = ±1.0° (±0.017453 rad)
+Number of points   : 21
+
+LINEAR FIT: Cl(β) ≈ -0.194524 * β + -0.000000  (β in radians)
+
+Clβ (derivative)   : -0.194524 [1/rad]
+Intercept (Cl₀)    : -0.000000
+R² (linearity)     : 1.000000
+Standard error     : 7.393865e-06
+RMSE               : 3.406131e-07
+Max residual       : 5.818182e-07
+============================================================
